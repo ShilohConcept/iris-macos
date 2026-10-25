@@ -1,0 +1,8 @@
+IRIS 1.1.0 (Electronic Arts, commit fd3e09e4e6fce30a5141ad6eca94a4ff61096e05), construit pour macOS par Shiloh Concept.
+Une seule modification de la source d'EA, dans src/TransitionTracker.h :
+
+    virtual ~TransitionTracker() = default;
+
+TransitionTracker est une classe de base abstraite sans destructeur virtuel ; FlashDetection détruit par elle un objet
+dérivé (comportement indéfini du C++). Le compilateur de macOS en fait un arrêt du programme (« Illegal instruction »)
+à la fin de chaque analyse ; Windows et Linux le tolèrent. Le résultat de l'analyse n'en dépend pas.
